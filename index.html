@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <title>ALMUÑÉCAR 38 — Private Residences</title>
+  <meta name="description" content="ALMUÑÉCAR 38 — Private access. 38 exclusive residences on Costa Tropical." />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="ALMUÑÉCAR 38 — Private Residences" />
+  <meta property="og:description" content="38 exklusive Residenzen an der Costa Tropical. Zugang nur auf Anfrage." />
+  <meta property="og:image" content="https://almunecar38.com/og-image.jpg" />
+  <meta property="og:url" content="https://almunecar38.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ALMUÑÉCAR 38 — Private Residences" />
+  <meta name="twitter:description" content="38 exklusive Residenzen an der Costa Tropical." />
+  <meta name="twitter:image" content="https://almunecar38.com/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏛%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --text:#e9e7e2;
+      --muted:rgba(233,231,226,.55);
+      --muted2:rgba(233,231,226,.30);
+      --gold:#c9a76a;
+      --stroke:rgba(233,231,226,.22);
+      --strokeGold:rgba(201,167,106,.38);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      overflow-x:hidden;
+    }
+
+    /* Background mood */
+    .bg-wrap{position:fixed; inset:0; pointer-events:none; z-index:0;}
+    .vignette{
+      position:absolute; inset:-20%;
+      background:
+        radial-gradient(1200px 700px at 55% 38%, rgba(201,167,106,.09), transparent 60%),
+        radial-gradient(900px 600px at 30% 70%, rgba(233,231,226,.05), transparent 62%),
+        radial-gradient(800px 500px at 78% 68%, rgba(201,167,106,.06), transparent 58%),
+        radial-gradient(1500px 1000px at 50% 50%, rgba(0,0,0,0), rgba(0,0,0,.70) 70%, rgba(0,0,0,.92) 100%);
+      opacity:.96;
+    }
+    .fog{
+      position:absolute; inset:-20%;
+      background:
+        radial-gradient(550px 380px at 25% 40%, rgba(233,231,226,.055), transparent 65%),
+        radial-gradient(750px 480px at 70% 55%, rgba(233,231,226,.040), transparent 68%),
+        radial-gradient(950px 650px at 50% 80%, rgba(201,167,106,.038), transparent 70%);
+      animation:fogMove 18s ease-in-out infinite alternate;
+      filter: blur(0.2px);
+    }
+    @keyframes fogMove{
+      from{transform:translate3d(-1.5%, -1%, 0) scale(1.02)}
+      to{transform:translate3d(1.5%, 1%, 0) scale(1.04)}
+    }
+    .grain{
+      position:absolute; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      background-size:280px 280px;
+      mix-blend-mode: overlay;
+      opacity:.25;
+    }
+
+    /* Floating background words */
+    .float-words{position:absolute; inset:0; opacity:.86;}
+    .float-word{
+      position:absolute;
+      font-family:"Cormorant Garamond", serif;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(233,231,226,.075);
+      font-size:clamp(16px, 2.2vw, 28px);
+      opacity:0;
+      transform: translateY(10px);
+      animation: wordFade 9s ease-in-out infinite;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.35));
+      white-space:nowrap;
+    }
+    .float-word.gold{ color: rgba(201,167,106,.115); }
+    @keyframes wordFade{
+      0%{opacity:0; transform:translateY(10px)}
+      18%{opacity:.92; transform:translateY(0)}
+      55%{opacity:.92; transform:translateY(0)}
+      78%{opacity:0; transform:translateY(-10px)}
+      100%{opacity:0; transform:translateY(-10px)}
+    }
+
+    /* Language buttons */
+    .lang{
+      position:fixed;
+      top:18px; right:18px;
+      z-index:5;
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:10px;
+      width:min(420px, calc(100vw - 36px));
+      user-select:none;
+    }
+    .lang button{
+      appearance:none;
+      border:1px solid rgba(233,231,226,.22);
+      background: rgba(0,0,0,.12);
+      color: rgba(233,231,226,.70);
+      padding:10px 0;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      border-radius:0;
+      cursor:pointer;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    .lang button.active{
+      border-color: var(--strokeGold);
+      color: var(--gold);
+      background: rgba(201,167,106,.08);
+    }
+
+    /* Center card */
+    .wrap{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 18px;
+    }
+    .card{
+      width:min(560px, 92vw);
+      text-align:center;
+      padding:28px 20px 22px;
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(15,15,18,.38), rgba(15,15,18,.12));
+      box-shadow: 0 40px 120px rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(233,231,226,.10);
+    }
+
+    .num{
+      font-family:"Cormorant Garamond", serif;
+      font-weight:300;
+      font-size: clamp(72px, 13vw, 140px);
+      line-height:1;
+      margin: 6px 0 6px;
+    }
+    .place{
+      margin:0 0 2px;
+      font-family:"Cormorant Garamond", serif;
+      font-weight:400;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color: rgba(233,231,226,.92);
+      font-size: clamp(22px, 4vw, 34px);
+    }
+    .sub{
+      margin:0 0 8px;
+      letter-spacing:.36em;
+      text-transform:uppercase;
+      color: rgba(233,231,226,.45);
+      font-size:12px;
+    }
+
+    /* Availability counter */
+    .availability{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 8px 16px;
+      border: 1px solid rgba(201,167,106,.25);
+      background: rgba(201,167,106,.06);
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .availability .dot{
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%, 100%{ opacity: 1; }
+      50%{ opacity: .4; }
+    }
+
+    .copy{
+      font-family:"Cormorant Garamond", serif;
+      font-weight:300;
+      font-size: clamp(20px, 3.2vw, 28px);
+      line-height:1.6;
+      color: rgba(233,231,226,.88);
+      margin: 0 auto 18px;
+      max-width: 450px;
+      min-height: 96px;
+      transition: opacity .45s ease;
+    }
+    .hint{
+      margin: 18px 0 10px;
+      font-size:11px;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color: rgba(233,231,226,.35);
+    }
+
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin: 6px auto 10px;
+      max-width: 420px;
+    }
+    input{
+      width:100%;
+      padding:16px 16px;
+      border-radius:0;
+      border:1px solid rgba(233,231,226,.22);
+      background: rgba(0,0,0,.10);
+      color: rgba(233,231,226,.92);
+      outline:none;
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+    input::placeholder{color: rgba(233,231,226,.35)}
+    input:focus{border-color: rgba(201,167,106,.40)}
+
+    button.cta{
+      width:100%;
+      padding:16px 16px;
+      border-radius:0;
+      border:1px solid rgba(233,231,226,.22);
+      background: transparent;
+      color: rgba(233,231,226,.75);
+      font-size:12px;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: border-color .2s ease, color .2s ease, background .2s ease;
+    }
+    button.cta:hover{
+      border-color: rgba(201,167,106,.45);
+      color: rgba(201,167,106,.95);
+      background: rgba(201,167,106,.06);
+    }
+    button.cta:disabled{
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* Expandable form */
+    .cta-trigger{
+      max-width: 420px;
+      margin: 6px auto 10px;
+    }
+    .cta-trigger.hidden{
+      display: none;
+    }
+    .form-expandable{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin: 6px auto 10px;
+      max-width: 420px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .5s ease, opacity .4s ease, margin .4s ease;
+    }
+    .form-expandable.expanded{
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .fine{
+      margin: 10px 0 0;
+      font-size:12px;
+      color: rgba(233,231,226,.40);
+    }
+    .fine strong{color: rgba(233,231,226,.68); font-weight:500}
+
+    /* Trust badges */
+    .trust{
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 16px 0 0;
+      padding: 14px 0 0;
+      border-top: 1px solid rgba(233,231,226,.08);
+    }
+    .trust-item{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(233,231,226,.35);
+    }
+    .trust-item svg{
+      width: 14px;
+      height: 14px;
+      opacity: .5;
+    }
+
+    footer{
+      position:fixed;
+      bottom:18px;
+      left:0; right:0;
+      z-index:4;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      pointer-events:none;
+    }
+    footer .brand{
+      font-size:11px;
+      letter-spacing:.44em;
+      text-transform:uppercase;
+      color: rgba(233,231,226,.22);
+    }
+    footer .partner{
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(233,231,226,.15);
+    }
+
+    /* Success Modal */
+    .modal-overlay{
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(11,11,12,.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s ease, visibility .4s ease;
+    }
+    .modal-overlay.active{
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal{
+      width: min(480px, 90vw);
+      padding: 40px 32px;
+      text-align: center;
+      border: 1px solid rgba(201,167,106,.25);
+      background: linear-gradient(180deg, rgba(20,20,24,.95), rgba(15,15,18,.98));
+      transform: translateY(20px) scale(.96);
+      transition: transform .4s ease;
+    }
+    .modal-overlay.active .modal{
+      transform: translateY(0) scale(1);
+    }
+    .modal-icon{
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      border: 1px solid var(--strokeGold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+    .modal-title{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .modal-text{
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(233,231,226,.65);
+      margin: 0 0 24px;
+    }
+    .modal-close{
+      appearance: none;
+      border: 1px solid rgba(233,231,226,.22);
+      background: transparent;
+      color: rgba(233,231,226,.65);
+      padding: 14px 32px;
+      font-size: 11px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .modal-close:hover{
+      border-color: rgba(201,167,106,.45);
+      color: var(--gold);
+    }
+
+    /* Cookie Consent */
+    .cookie-banner{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      padding: 16px 20px;
+      background: rgba(15,15,18,.96);
+      border-top: 1px solid rgba(233,231,226,.10);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      transform: translateY(100%);
+      transition: transform .4s ease;
+    }
+    .cookie-banner.active{
+      transform: translateY(0);
+    }
+    .cookie-text{
+      font-size: 12px;
+      color: rgba(233,231,226,.6);
+      max-width: 600px;
+    }
+    .cookie-text a{
+      color: rgba(233,231,226,.8);
+      text-decoration: underline;
+    }
+    .cookie-buttons{
+      display: flex;
+      gap: 10px;
+    }
+    .cookie-btn{
+      appearance: none;
+      border: 1px solid rgba(233,231,226,.22);
+      background: transparent;
+      color: rgba(233,231,226,.7);
+      padding: 10px 20px;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .cookie-btn.accept{
+      border-color: var(--strokeGold);
+      color: var(--gold);
+      background: rgba(201,167,106,.08);
+    }
+    .cookie-btn:hover{
+      border-color: rgba(201,167,106,.5);
+      color: var(--gold);
+    }
+
+    @media (max-width:520px){
+      .lang{grid-template-columns: repeat(3, 1fr); width:210px}
+      .trust{ flex-direction: column; gap: 8px; }
+    }
+    @media (max-width:420px){
+      .card{padding:24px 16px 18px}
+      .copy{min-height: 110px;}
+      .cookie-banner{ flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-wrap" aria-hidden="true">
+    <div class="vignette"></div>
+    <div class="fog"></div>
+    <div class="grain"></div>
+
+    <div class="float-words" id="floatWords">
+      <div class="float-word gold" style="left:10%; top:18%; animation-delay:0s;">38 RESIDENCES</div>
+      <div class="float-word" style="left:62%; top:22%; animation-delay:1.2s;">SEA VIEW</div>
+      <div class="float-word" style="left:14%; top:46%; animation-delay:2.4s;">PRIVATE ACCESS</div>
+      <div class="float-word gold" style="left:58%; top:52%; animation-delay:3.6s;">LICENSE VALIDATED</div>
+      <div class="float-word" style="left:20%; top:72%; animation-delay:4.8s;">LOW TECH RISK</div>
+      <div class="float-word gold" style="left:56%; top:76%; animation-delay:6s;">ALMUÑÉCAR</div>
+    </div>
+  </div>
+
+  <div class="lang" role="group" aria-label="Language switcher">
+    <button type="button" class="active" data-lang="de">DEU</button>
+    <button type="button" data-lang="en">ENG</button>
+    <button type="button" data-lang="es">ESP</button>
+    <button type="button" data-lang="sv">SWE</button>
+    <button type="button" data-lang="fi">FIN</button>
+  </div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="num" aria-label="38">38</div>
+      <p class="place">ALMUÑÉCAR</p>
+      <p class="sub" id="subline">COSTA TROPICAL · PRIVATE RESIDENCES</p>
+
+      <!-- Availability counter -->
+      <div class="availability" id="availability">
+        <span class="dot"></span>
+        <span id="availText">14 VON 38 VERFÜGBAR</span>
+      </div>
+
+      <p class="copy" id="headline">
+        Manche Orte teilt man nicht.<br/>
+        Manche Chancen auch nicht.
+      </p>
+
+      <div class="hint" id="hint">INTERESSE HINTERLEGEN</div>
+
+      <!-- Collapsed CTA button -->
+      <button class="cta cta-trigger" type="button" id="ctaTrigger">ZUGANG ANFORDERN</button>
+
+      <!-- Expandable form -->
+      <form class="form-expandable" id="interestForm">
+        <input id="name" name="name" type="text" placeholder="Name" autocomplete="name" required />
+        <input id="email" name="email" type="email" placeholder="E-Mail" autocomplete="email" required />
+        <input id="phone" name="phone" type="tel" placeholder="Telefon (optional)" autocomplete="tel" />
+        <button class="cta" type="submit" id="cta">ABSENDEN</button>
+      </form>
+
+      <p class="fine" id="fine">
+        Zugang nur auf Anfrage. <strong>Diskretion</strong> garantiert.
+      </p>
+
+      <!-- Trust badges -->
+      <div class="trust">
+        <div class="trust-item" id="trust1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4"/>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Licencia validada</span>
+        </div>
+        <div class="trust-item" id="trust2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <span>Datos encriptados</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand">almunecar38.com</div>
+    <div class="partner" id="partner">Ein Projekt von Costa Tropical Investments</div>
+  </footer>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      </div>
+      <h2 class="modal-title" id="modalTitle">Anfrage erhalten</h2>
+      <p class="modal-text" id="modalText">
+        Vielen Dank für Ihr Interesse. Wir prüfen Ihre Anfrage und melden uns innerhalb von 48 Stunden mit exklusiven Informationen.
+      </p>
+      <button class="modal-close" id="modalClose">SCHLIEßEN</button>
+    </div>
+  </div>
+
+  <!-- Cookie Consent -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-text" id="cookieText">
+      Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern und anonyme Nutzungsstatistiken zu erfassen.
+    </p>
+    <div class="cookie-buttons">
+      <button class="cookie-btn" id="cookieDecline">ABLEHNEN</button>
+      <button class="cookie-btn accept" id="cookieAccept">AKZEPTIEREN</button>
+    </div>
+  </div>
+
+  <!-- Analytics (loads only after consent) -->
+  <script>
+    function loadAnalytics(){
+      // Placeholder for Google Analytics or other tracking
+      // Replace with your actual GA4 tracking code
+      /*
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+      
+      var script = document.createElement('script');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+      script.async = true;
+      document.head.appendChild(script);
+      */
+      console.log('Analytics loaded (placeholder)');
+    }
+  </script>
+
+  <script>
+    const content = {
+      de: {
+        htmlLang: "de",
+        subline: "COSTA TROPICAL · PRIVATE RESIDENCES",
+        availability: "14 VON 38 VERFÜGBAR",
+        hint: "INTERESSE HINTERLEGEN",
+        namePH: "Name",
+        emailPH: "E-Mail",
+        phonePH: "Telefon (optional)",
+        ctaTrigger: "ZUGANG ANFORDERN",
+        cta: "ABSENDEN",
+        fine: "Zugang nur auf Anfrage. <strong>Diskretion</strong> garantiert.",
+        trust1: "Lizenz validiert",
+        trust2: "Daten verschlüsselt",
+        partner: "Ein Projekt von Costa Tropical Investments",
+        modalTitle: "Anfrage erhalten",
+        modalText: "Vielen Dank für Ihr Interesse. Wir prüfen Ihre Anfrage und melden uns innerhalb von 48 Stunden mit exklusiven Informationen.",
+        modalClose: "SCHLIEßEN",
+        cookieText: "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern und anonyme Nutzungsstatistiken zu erfassen.",
+        cookieDecline: "ABLEHNEN",
+        cookieAccept: "AKZEPTIEREN",
+        bgWords: ["38 RESIDENCES","MEERBLICK","PRIVATER ZUGANG","LIZENZ VALIDIERT","NIEDRIGES RISIKO","ALMUÑÉCAR"],
+        headlineLoop: [
+          "Manche Orte teilt man nicht.<br/>Manche Chancen auch nicht.",
+          "38 Residenzen.<br/>Für Menschen, die vorausdenken.",
+          "Ein Ort, der bleibt.<br/>Eine Entscheidung, die trägt.",
+          "Ihr Rückzugsort.<br/>300 Sonnentage im Jahr.",
+          "Zwischen Bergen und Meer.<br/>Ihr nächstes Kapitel."
+        ]
+      },
+      en: {
+        htmlLang: "en",
+        subline: "COSTA TROPICAL · PRIVATE RESIDENCES",
+        availability: "14 OF 38 AVAILABLE",
+        hint: "REQUEST ACCESS",
+        namePH: "Name",
+        emailPH: "E-mail",
+        phonePH: "Phone (optional)",
+        ctaTrigger: "REQUEST ACCESS",
+        cta: "SUBMIT",
+        fine: "Access by request only. <strong>Discretion</strong> guaranteed.",
+        trust1: "License validated",
+        trust2: "Data encrypted",
+        partner: "A project by Costa Tropical Investments",
+        modalTitle: "Request received",
+        modalText: "Thank you for your interest. We will review your request and contact you within 48 hours with exclusive information.",
+        modalClose: "CLOSE",
+        cookieText: "This website uses cookies to improve your experience and collect anonymous usage statistics.",
+        cookieDecline: "DECLINE",
+        cookieAccept: "ACCEPT",
+        bgWords: ["38 RESIDENCES","SEA VIEW","PRIVATE ACCESS","LICENSE VALIDATED","LOW RISK","ALMUÑÉCAR"],
+        headlineLoop: [
+          "Some places aren't shared.<br/>Neither are certain opportunities.",
+          "38 residences.<br/>For those who think ahead.",
+          "A location that endures.<br/>A decision that performs.",
+          "Your retreat.<br/>300 days of sunshine.",
+          "Between mountains and sea.<br/>Your next chapter."
+        ]
+      },
+      es: {
+        htmlLang: "es",
+        subline: "COSTA TROPICAL · RESIDENCIAS PRIVADAS",
+        availability: "14 DE 38 DISPONIBLES",
+        hint: "SOLICITAR ACCESO",
+        namePH: "Nombre",
+        emailPH: "E-mail",
+        phonePH: "Teléfono (opcional)",
+        ctaTrigger: "SOLICITAR ACCESO",
+        cta: "ENVIAR",
+        fine: "Acceso solo bajo solicitud. <strong>Discreción</strong> garantizada.",
+        trust1: "Licencia validada",
+        trust2: "Datos encriptados",
+        partner: "Un proyecto de Costa Tropical Investments",
+        modalTitle: "Solicitud recibida",
+        modalText: "Gracias por su interés. Revisaremos su solicitud y le contactaremos en 48 horas con información exclusiva.",
+        modalClose: "CERRAR",
+        cookieText: "Este sitio web utiliza cookies para mejorar su experiencia y recopilar estadísticas de uso anónimas.",
+        cookieDecline: "RECHAZAR",
+        cookieAccept: "ACEPTAR",
+        bgWords: ["38 RESIDENCIAS","VISTAS AL MAR","ACCESO PRIVADO","LICENCIA VIGENTE","BAJO RIESGO","ALMUÑÉCAR"],
+        headlineLoop: [
+          "Algunos lugares no se comparten.<br/>Algunas oportunidades tampoco.",
+          "38 residencias.<br/>Para quienes se adelantan.",
+          "Un lugar que permanece.<br/>Una decisión con valor.",
+          "Tu refugio.<br/>300 días de sol al año.",
+          "Entre montañas y mar.<br/>Tu próximo capítulo."
+        ]
+      },
+      sv: {
+        htmlLang: "sv",
+        subline: "COSTA TROPICAL · PRIVATA BOSTÄDER",
+        availability: "14 AV 38 TILLGÄNGLIGA",
+        hint: "BEGÄR ÅTKOMST",
+        namePH: "Namn",
+        emailPH: "E-post",
+        phonePH: "Telefon (valfritt)",
+        ctaTrigger: "BEGÄR ÅTKOMST",
+        cta: "SKICKA",
+        fine: "Åtkomst endast på begäran. <strong>Diskretion</strong> garanteras.",
+        trust1: "Licens validerad",
+        trust2: "Data krypterad",
+        partner: "Ett projekt av Costa Tropical Investments",
+        modalTitle: "Förfrågan mottagen",
+        modalText: "Tack för ditt intresse. Vi granskar din förfrågan och kontaktar dig inom 48 timmar med exklusiv information.",
+        modalClose: "STÄNG",
+        cookieText: "Denna webbplats använder cookies för att förbättra din upplevelse och samla in anonym användningsstatistik.",
+        cookieDecline: "AVVISA",
+        cookieAccept: "ACCEPTERA",
+        bgWords: ["38 BOSTÄDER","HAVSUTSIKT","PRIVAT ÅTKOMST","GILTIGT TILLSTÅND","LÅG RISK","ALMUÑÉCAR"],
+        headlineLoop: [
+          "Vissa platser delar man inte.<br/>Inte heller vissa möjligheter.",
+          "38 bostäder.<br/>För dig som tänker framåt.",
+          "En plats som består.<br/>Ett beslut med tyngd.",
+          "Din tillflyktsort.<br/>300 soldagar om året.",
+          "Mellan berg och hav.<br/>Ditt nästa kapitel."
+        ]
+      },
+      fi: {
+        htmlLang: "fi",
+        subline: "COSTA TROPICAL · YKSITYISET ASUNNOT",
+        availability: "14/38 SAATAVILLA",
+        hint: "PYYDÄ PÄÄSY",
+        namePH: "Nimi",
+        emailPH: "Sähköposti",
+        phonePH: "Puhelin (valinnainen)",
+        ctaTrigger: "PYYDÄ PÄÄSY",
+        cta: "LÄHETÄ",
+        fine: "Pääsy vain pyynnöstä. <strong>Hienotunteisuus</strong> taataan.",
+        trust1: "Lisenssi validoitu",
+        trust2: "Data salattu",
+        partner: "Costa Tropical Investmentsin projekti",
+        modalTitle: "Pyyntö vastaanotettu",
+        modalText: "Kiitos mielenkiinnostasi. Käsittelemme pyyntösi ja otamme sinuun yhteyttä 48 tunnin kuluessa eksklusiivisilla tiedoilla.",
+        modalClose: "SULJE",
+        cookieText: "Tämä sivusto käyttää evästeitä parantaakseen kokemustasi ja kerätäkseen nimettömiä käyttötilastoja.",
+        cookieDecline: "HYLKÄÄ",
+        cookieAccept: "HYVÄKSY",
+        bgWords: ["38 ASUNTOA","MERINÄKÖALA","YKSITYINEN PÄÄSY","LUPA VOIMASSA","MATALA RISKI","ALMUÑÉCAR"],
+        headlineLoop: [
+          "Kaikkia paikkoja ei jaeta.<br/>Eikä kaikkia mahdollisuuksia.",
+          "38 asuntoa.<br/>Niille, jotka ajattelevat edellä.",
+          "Paikka, joka säilyy.<br/>Päätös, joka kantaa.",
+          "Pakopaikkasi.<br/>300 aurinkopäivää vuodessa.",
+          "Vuorten ja meren välissä.<br/>Seuraava lukusi."
+        ]
+      }
+    };
+
+    const btns = document.querySelectorAll(".lang button[data-lang]");
+    const subline = document.getElementById("subline");
+    const availText = document.getElementById("availText");
+    const headline = document.getElementById("headline");
+    const hint = document.getElementById("hint");
+    const nameInput = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const ctaTrigger = document.getElementById("ctaTrigger");
+    const cta = document.getElementById("cta");
+    const fine = document.getElementById("fine");
+    const trust1 = document.getElementById("trust1").querySelector("span");
+    const trust2 = document.getElementById("trust2").querySelector("span");
+    const partner = document.getElementById("partner");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const modalClose = document.getElementById("modalClose");
+    const cookieText = document.getElementById("cookieText");
+    const cookieDecline = document.getElementById("cookieDecline");
+    const cookieAccept = document.getElementById("cookieAccept");
+    const floatWords = document.querySelectorAll("#floatWords .float-word");
+    const modalOverlay = document.getElementById("modalOverlay");
+    const interestForm = document.getElementById("interestForm");
+    const cookieBanner = document.getElementById("cookieBanner");
+
+    let currentLang = "de";
+    let loopIndex = 0;
+
+    function setLang(lang){
+      if(!content[lang]) return;
+      currentLang = lang;
+      loopIndex = 0;
+
+      const t = content[lang];
+      document.documentElement.lang = t.htmlLang;
+
+      subline.textContent = t.subline;
+      availText.textContent = t.availability;
+      hint.textContent = t.hint;
+      nameInput.placeholder = t.namePH;
+      email.placeholder = t.emailPH;
+      phone.placeholder = t.phonePH;
+      ctaTrigger.textContent = t.ctaTrigger;
+      cta.textContent = t.cta;
+      fine.innerHTML = t.fine;
+      trust1.textContent = t.trust1;
+      trust2.textContent = t.trust2;
+      partner.textContent = t.partner;
+      modalTitle.textContent = t.modalTitle;
+      modalText.textContent = t.modalText;
+      modalClose.textContent = t.modalClose;
+      cookieText.textContent = t.cookieText;
+      cookieDecline.textContent = t.cookieDecline;
+      cookieAccept.textContent = t.cookieAccept;
+
+      headline.style.opacity = "0";
+      setTimeout(() => {
+        headline.innerHTML = t.headlineLoop[0];
+        headline.style.opacity = "1";
+      }, 220);
+
+      const words = t.bgWords;
+      floatWords.forEach((el, i) => { el.textContent = words[i] || el.textContent; });
+
+      btns.forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+      localStorage.setItem("am38_lang", lang);
+    }
+
+    btns.forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+
+    function rotateHeadline(){
+      const t = content[currentLang];
+      const list = t.headlineLoop;
+      loopIndex = (loopIndex + 1) % list.length;
+      headline.style.opacity = "0";
+      setTimeout(() => {
+        headline.innerHTML = list[loopIndex];
+        headline.style.opacity = "1";
+      }, 380);
+    }
+
+    setInterval(rotateHeadline, 8500);
+
+    const stored = localStorage.getItem("am38_lang");
+    setLang(stored && content[stored] ? stored : "de");
+
+    // ============================================
+    // GOOGLE SHEETS CONFIGURATION
+    // ============================================
+    // 1. Erstelle ein neues Google Sheet
+    // 2. Gehe zu Extensions > Apps Script
+    // 3. Füge den Code aus google-apps-script.js ein
+    // 4. Deploy > New Deployment > Web App
+    // 5. Execute as: Me, Access: Anyone
+    // 6. Kopiere die Web App URL hier:
+    
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNLVXOpDQh-Wt_7Wmm87ilUPUgUCu-vjKwBN_bnaETA2Y09YI81yokHJ41muQZXyfDTQ/exec';
+
+    async function saveToGoogleSheets(data) {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      
+      // no-cors doesn't return response, so we assume success
+      return true;
+    }
+
+    // Form expand/collapse
+    ctaTrigger.addEventListener("click", () => {
+      ctaTrigger.classList.add("hidden");
+      interestForm.classList.add("expanded");
+      setTimeout(() => nameInput.focus(), 300);
+    });
+
+    // Form submission with Google Sheets
+    interestForm.addEventListener("submit", async function(e){
+      e.preventDefault();
+      
+      const leadData = {
+        timestamp: new Date().toISOString(),
+        name: nameInput.value.trim(),
+        email: email.value.trim(),
+        phone: phone.value.trim() || '',
+        language: currentLang,
+        source: 'almunecar38',
+        page: window.location.href
+      };
+
+      cta.disabled = true;
+      cta.textContent = "...";
+
+      try {
+        await saveToGoogleSheets(leadData);
+        
+        // Show success modal
+        modalOverlay.classList.add("active");
+        
+        // Reset form
+        nameInput.value = "";
+        email.value = "";
+        phone.value = "";
+        interestForm.classList.remove("expanded");
+        ctaTrigger.classList.remove("hidden");
+        
+      } catch(err){
+        console.error(err);
+        // Still show success (no-cors doesn't confirm)
+        modalOverlay.classList.add("active");
+        nameInput.value = "";
+        email.value = "";
+        phone.value = "";
+        interestForm.classList.remove("expanded");
+        ctaTrigger.classList.remove("hidden");
+      }
+
+      cta.disabled = false;
+      cta.textContent = content[currentLang].cta;
+    });
+
+    // Modal close
+    modalClose.addEventListener("click", () => {
+      modalOverlay.classList.remove("active");
+    });
+    modalOverlay.addEventListener("click", (e) => {
+      if(e.target === modalOverlay) modalOverlay.classList.remove("active");
+    });
+
+    // Cookie consent
+    const cookieConsent = localStorage.getItem("am38_cookies");
+    if(!cookieConsent){
+      setTimeout(() => cookieBanner.classList.add("active"), 1500);
+    } else if(cookieConsent === "accepted"){
+      loadAnalytics();
+    }
+
+    cookieAccept.addEventListener("click", () => {
+      localStorage.setItem("am38_cookies", "accepted");
+      cookieBanner.classList.remove("active");
+      loadAnalytics();
+    });
+
+    cookieDecline.addEventListener("click", () => {
+      localStorage.setItem("am38_cookies", "declined");
+      cookieBanner.classList.remove("active");
+    });
+  </script>
+</body>
+</html>
