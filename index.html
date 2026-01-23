@@ -887,6 +887,49 @@
     
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_b2498qw3T7rJgEwVqdy44O0I3IyR1L3tpG8x7JgqDqB8jxoIcKdDt6spMHQ4PlCg8Q/exec';
 
+    // ============================================
+    // UTM & PARTNER TRACKING
+    // ============================================
+    // Erfasst UTM-Parameter und Partner-Codes aus der URL
+    // Beispiel: almunecar38.com/?ref=partner123&utm_source=instagram
+
+    function getTrackingParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_term: params.get('utm_term') || '',
+        utm_content: params.get('utm_content') || '',
+        ref: params.get('ref') || params.get('partner') || ''
+      };
+    }
+
+    // Speichere Tracking-Daten in Session (bleibt erhalten bei Navigation)
+    const trackingParams = getTrackingParams();
+    if (trackingParams.ref) {
+      sessionStorage.setItem('am38_ref', trackingParams.ref);
+    }
+    if (trackingParams.utm_source) {
+      sessionStorage.setItem('am38_utm', JSON.stringify(trackingParams));
+    }
+
+    // Hole gespeicherte Tracking-Daten (falls User später zurückkommt)
+    function getStoredTracking() {
+      const storedRef = sessionStorage.getItem('am38_ref');
+      const storedUtm = sessionStorage.getItem('am38_utm');
+      const current = getTrackingParams();
+
+      return {
+        utm_source: current.utm_source || (storedUtm ? JSON.parse(storedUtm).utm_source : ''),
+        utm_medium: current.utm_medium || (storedUtm ? JSON.parse(storedUtm).utm_medium : ''),
+        utm_campaign: current.utm_campaign || (storedUtm ? JSON.parse(storedUtm).utm_campaign : ''),
+        utm_term: current.utm_term || (storedUtm ? JSON.parse(storedUtm).utm_term : ''),
+        utm_content: current.utm_content || (storedUtm ? JSON.parse(storedUtm).utm_content : ''),
+        ref: current.ref || storedRef || ''
+      };
+    }
+
     async function saveToGoogleSheets(data) {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -912,6 +955,7 @@
     interestForm.addEventListener("submit", async function(e){
       e.preventDefault();
       
+      const tracking = getStoredTracking();
       const leadData = {
         timestamp: new Date().toISOString(),
         name: nameInput.value.trim(),
@@ -919,7 +963,15 @@
         phone: phone.value.trim() || '',
         language: currentLang,
         source: 'almunecar38',
-        page: window.location.href
+        page: window.location.href,
+        // UTM Tracking
+        utm_source: tracking.utm_source,
+        utm_medium: tracking.utm_medium,
+        utm_campaign: tracking.utm_campaign,
+        utm_term: tracking.utm_term,
+        utm_content: tracking.utm_content,
+        // Partner/Tippgeber
+        referrer: tracking.ref
       };
 
       cta.disabled = true;
