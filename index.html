@@ -479,6 +479,161 @@
       color: var(--gold);
     }
 
+    /* WhatsApp Floating Button */
+    .whatsapp-float{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 80;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover{
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37, 211, 102, .5);
+    }
+    .whatsapp-float svg{
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+    .whatsapp-tooltip{
+      position: absolute;
+      right: 68px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(15,15,18,.95);
+      border: 1px solid rgba(233,231,226,.15);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s ease, visibility .2s ease;
+    }
+    .whatsapp-float:hover .whatsapp-tooltip{
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Exit-Intent Popup */
+    .exit-overlay{
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      background: rgba(11,11,12,.94);
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s ease, visibility .4s ease;
+    }
+    .exit-overlay.active{
+      opacity: 1;
+      visibility: visible;
+    }
+    .exit-popup{
+      width: min(520px, 92vw);
+      padding: 44px 36px;
+      text-align: center;
+      border: 1px solid rgba(201,167,106,.30);
+      background: linear-gradient(180deg, rgba(20,20,24,.97), rgba(12,12,15,.99));
+      transform: translateY(24px) scale(.95);
+      transition: transform .4s ease;
+    }
+    .exit-overlay.active .exit-popup{
+      transform: translateY(0) scale(1);
+    }
+    .exit-close{
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      color: rgba(233,231,226,.5);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+    .exit-close:hover{ color: var(--gold); }
+    .exit-icon{
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 18px;
+      border: 1px solid var(--strokeGold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+    .exit-title{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 26px;
+      font-weight: 400;
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+    .exit-text{
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(233,231,226,.60);
+      margin: 0 0 22px;
+    }
+    .exit-form{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    .exit-form input{
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(233,231,226,.22);
+      background: rgba(0,0,0,.15);
+      color: var(--text);
+      font-size: 14px;
+    }
+    .exit-form input::placeholder{ color: rgba(233,231,226,.35); }
+    .exit-form input:focus{ border-color: rgba(201,167,106,.45); outline: none; }
+    .exit-form button{
+      padding: 14px;
+      border: 1px solid var(--strokeGold);
+      background: rgba(201,167,106,.12);
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .exit-form button:hover{
+      background: rgba(201,167,106,.20);
+      border-color: var(--gold);
+    }
+    .exit-skip{
+      margin-top: 14px;
+      font-size: 11px;
+      color: rgba(233,231,226,.35);
+      cursor: pointer;
+    }
+    .exit-skip:hover{ color: rgba(233,231,226,.55); }
+
     @media (max-width:520px){
       .lang{grid-template-columns: repeat(3, 1fr); width:210px}
       .trust{ flex-direction: column; gap: 8px; }
@@ -608,23 +763,79 @@
     </div>
   </div>
 
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/34600000000?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ALMU%C3%91%C3%89CAR%2038"
+     class="whatsapp-float"
+     id="whatsappBtn"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="WhatsApp">
+    <span class="whatsapp-tooltip" id="whatsappTooltip">Direkt auf WhatsApp schreiben</span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- Exit-Intent Popup (Lead Magnet) -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-popup">
+      <button class="exit-close" id="exitClose">&times;</button>
+      <div class="exit-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <h3 class="exit-title" id="exitTitle">Kostenloses Exposé</h3>
+      <p class="exit-text" id="exitText">
+        Erhalten Sie unser exklusives PDF mit Grundrissen, Preisen und allen Details zu den 38 Residenzen.
+      </p>
+      <form class="exit-form" id="exitForm">
+        <input type="email" id="exitEmail" placeholder="Ihre E-Mail-Adresse" required />
+        <button type="submit" id="exitSubmit">EXPOSÉ ANFORDERN</button>
+      </form>
+      <p class="exit-skip" id="exitSkip">Nein danke, ich schaue nur</p>
+    </div>
+  </div>
+
   <!-- Analytics (loads only after consent) -->
   <script>
+    // ============================================
+    // GOOGLE ANALYTICS 4 CONFIGURATION
+    // ============================================
+    // Ersetze 'G-XXXXXXXXXX' mit deiner GA4 Measurement ID
+    // Zu finden unter: GA4 > Admin > Data Streams > Web
+
+    const GA4_MEASUREMENT_ID = 'G-KL4X5ZYGME';
+
     function loadAnalytics(){
-      // Placeholder for Google Analytics or other tracking
-      // Replace with your actual GA4 tracking code
-      /*
+      if (GA4_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+        console.log('Analytics: Bitte GA4_MEASUREMENT_ID konfigurieren');
+        return;
+      }
+
+      // Google Analytics 4 laden
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-      
+      gtag('config', GA4_MEASUREMENT_ID);
+
       var script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_MEASUREMENT_ID;
       script.async = true;
       document.head.appendChild(script);
-      */
-      console.log('Analytics loaded (placeholder)');
+
+      console.log('Analytics loaded:', GA4_MEASUREMENT_ID);
+    }
+
+    // Analytics Event Helper
+    function trackEvent(eventName, params = {}) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, params);
+      }
     }
   </script>
 
@@ -659,7 +870,15 @@
           "Ihr Rückzugsort.<br/>300 Sonnentage im Jahr.",
           "Nur 10 Monate Bauzeit.<br/>Schneller am Ziel.",
           "Zwischen Bergen und Meer.<br/>Ihr nächstes Kapitel."
-        ]
+        ],
+        // WhatsApp & Exit-Intent
+        whatsappTooltip: "Direkt auf WhatsApp schreiben",
+        whatsappMsg: "Hallo, ich interessiere mich für ALMUÑÉCAR 38",
+        exitTitle: "Kostenloses Exposé",
+        exitText: "Erhalten Sie unser exklusives PDF mit Grundrissen, Preisen und allen Details zu den 38 Residenzen.",
+        exitPlaceholder: "Ihre E-Mail-Adresse",
+        exitSubmit: "EXPOSÉ ANFORDERN",
+        exitSkip: "Nein danke, ich schaue nur"
       },
       en: {
         htmlLang: "en",
@@ -690,7 +909,14 @@
           "Your retreat.<br/>300 days of sunshine.",
           "Only 10 months build time.<br/>Faster to your goal.",
           "Between mountains and sea.<br/>Your next chapter."
-        ]
+        ],
+        whatsappTooltip: "Message us on WhatsApp",
+        whatsappMsg: "Hello, I'm interested in ALMUÑÉCAR 38",
+        exitTitle: "Free Brochure",
+        exitText: "Get our exclusive PDF with floor plans, prices and all details about the 38 residences.",
+        exitPlaceholder: "Your email address",
+        exitSubmit: "GET BROCHURE",
+        exitSkip: "No thanks, just browsing"
       },
       es: {
         htmlLang: "es",
@@ -721,7 +947,14 @@
           "Tu refugio.<br/>300 días de sol al año.",
           "Solo 10 meses de obra.<br/>Más rápido a tu meta.",
           "Entre montañas y mar.<br/>Tu próximo capítulo."
-        ]
+        ],
+        whatsappTooltip: "Escríbenos por WhatsApp",
+        whatsappMsg: "Hola, me interesa ALMUÑÉCAR 38",
+        exitTitle: "Folleto Gratuito",
+        exitText: "Reciba nuestro PDF exclusivo con planos, precios y todos los detalles de las 38 residencias.",
+        exitPlaceholder: "Su correo electrónico",
+        exitSubmit: "SOLICITAR FOLLETO",
+        exitSkip: "No gracias, solo miro"
       },
       sv: {
         htmlLang: "sv",
@@ -752,7 +985,14 @@
           "Din tillflyktsort.<br/>300 soldagar om året.",
           "Endast 10 månaders byggtid.<br/>Snabbare till målet.",
           "Mellan berg och hav.<br/>Ditt nästa kapitel."
-        ]
+        ],
+        whatsappTooltip: "Skriv till oss på WhatsApp",
+        whatsappMsg: "Hej, jag är intresserad av ALMUÑÉCAR 38",
+        exitTitle: "Gratis Broschyr",
+        exitText: "Få vår exklusiva PDF med planritningar, priser och alla detaljer om de 38 bostäderna.",
+        exitPlaceholder: "Din e-postadress",
+        exitSubmit: "HÄMTA BROSCHYR",
+        exitSkip: "Nej tack, jag tittar bara"
       },
       fi: {
         htmlLang: "fi",
@@ -783,7 +1023,14 @@
           "Pakopaikkasi.<br/>300 aurinkopäivää vuodessa.",
           "Vain 10 kuukauden rakennusaika.<br/>Nopeammin perille.",
           "Vuorten ja meren välissä.<br/>Seuraava lukusi."
-        ]
+        ],
+        whatsappTooltip: "Kirjoita meille WhatsAppissa",
+        whatsappMsg: "Hei, olen kiinnostunut ALMUÑÉCAR 38:sta",
+        exitTitle: "Ilmainen Esite",
+        exitText: "Saat eksklusiivisen PDF:n pohjapiirustuksilla, hinnoilla ja kaikilla tiedoilla 38 asunnosta.",
+        exitPlaceholder: "Sähköpostiosoitteesi",
+        exitSubmit: "PYYDÄ ESITE",
+        exitSkip: "Ei kiitos, vain katselen"
       }
     };
 
@@ -855,6 +1102,29 @@
 
       btns.forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
       localStorage.setItem("am38_lang", lang);
+
+      // Update WhatsApp & Exit-Intent texts
+      const whatsappTooltip = document.getElementById("whatsappTooltip");
+      const whatsappBtn = document.getElementById("whatsappBtn");
+      const exitTitle = document.getElementById("exitTitle");
+      const exitText = document.getElementById("exitText");
+      const exitEmail = document.getElementById("exitEmail");
+      const exitSubmit = document.getElementById("exitSubmit");
+      const exitSkip = document.getElementById("exitSkip");
+
+      if (whatsappTooltip) whatsappTooltip.textContent = t.whatsappTooltip;
+      if (exitTitle) exitTitle.textContent = t.exitTitle;
+      if (exitText) exitText.textContent = t.exitText;
+      if (exitEmail) exitEmail.placeholder = t.exitPlaceholder;
+      if (exitSubmit) exitSubmit.textContent = t.exitSubmit;
+      if (exitSkip) exitSkip.textContent = t.exitSkip;
+
+      // Update WhatsApp link with localized message
+      if (whatsappBtn) {
+        const waNumber = '34601180586'; // <- WHATSAPP NUMMER HIER ÄNDERN
+        const waMsg = encodeURIComponent(t.whatsappMsg);
+        whatsappBtn.href = `https://wa.me/${waNumber}?text=${waMsg}`;
+      }
     }
 
     btns.forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
@@ -979,7 +1249,8 @@
 
       try {
         await saveToGoogleSheets(leadData);
-        
+        trackEvent('lead_submitted', { source: 'main_form', language: currentLang });
+
         // Show success modal
         modalOverlay.classList.add("active");
         
@@ -1031,6 +1302,105 @@
       localStorage.setItem("am38_cookies", "declined");
       cookieBanner.classList.remove("active");
     });
+
+    // ============================================
+    // EXIT-INTENT POPUP
+    // ============================================
+    const exitOverlay = document.getElementById("exitOverlay");
+    const exitClose = document.getElementById("exitClose");
+    const exitForm = document.getElementById("exitForm");
+    const exitEmailInput = document.getElementById("exitEmail");
+    const exitSkipBtn = document.getElementById("exitSkip");
+    let exitShown = sessionStorage.getItem("am38_exit_shown");
+
+    function showExitPopup() {
+      if (exitShown || modalOverlay.classList.contains("active")) return;
+      exitOverlay.classList.add("active");
+      exitShown = true;
+      sessionStorage.setItem("am38_exit_shown", "true");
+      trackEvent('exit_intent_shown');
+    }
+
+    function closeExitPopup() {
+      exitOverlay.classList.remove("active");
+    }
+
+    // Exit-Intent Detection (Desktop: mouse leaves viewport top)
+    document.addEventListener("mouseout", (e) => {
+      if (e.clientY < 10 && e.relatedTarget === null) {
+        showExitPopup();
+      }
+    });
+
+    // Mobile: Show after 45 seconds if no interaction
+    let mobileExitTimer;
+    if ('ontouchstart' in window) {
+      mobileExitTimer = setTimeout(() => {
+        if (!exitShown && !interestForm.classList.contains("expanded")) {
+          showExitPopup();
+        }
+      }, 45000);
+    }
+
+    // Close handlers
+    exitClose.addEventListener("click", closeExitPopup);
+    exitSkipBtn.addEventListener("click", () => {
+      closeExitPopup();
+      trackEvent('exit_intent_skipped');
+    });
+    exitOverlay.addEventListener("click", (e) => {
+      if (e.target === exitOverlay) closeExitPopup();
+    });
+
+    // Exit form submission
+    exitForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const tracking = getStoredTracking();
+      const leadData = {
+        timestamp: new Date().toISOString(),
+        name: '',
+        email: exitEmailInput.value.trim(),
+        phone: '',
+        language: currentLang,
+        source: 'almunecar38_exit_popup',
+        page: window.location.href,
+        utm_source: tracking.utm_source,
+        utm_medium: tracking.utm_medium,
+        utm_campaign: tracking.utm_campaign,
+        utm_term: tracking.utm_term,
+        utm_content: tracking.utm_content,
+        referrer: tracking.ref
+      };
+
+      const submitBtn = document.getElementById("exitSubmit");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "...";
+
+      try {
+        await saveToGoogleSheets(leadData);
+        trackEvent('exit_intent_converted', { method: 'email' });
+        closeExitPopup();
+        modalOverlay.classList.add("active");
+        exitEmailInput.value = "";
+      } catch (err) {
+        console.error(err);
+        closeExitPopup();
+        modalOverlay.classList.add("active");
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = content[currentLang].exitSubmit;
+    });
+
+    // ============================================
+    // WHATSAPP TRACKING
+    // ============================================
+    const whatsappBtn = document.getElementById("whatsappBtn");
+    whatsappBtn.addEventListener("click", () => {
+      trackEvent('whatsapp_click', { language: currentLang });
+    });
+
   </script>
 </body>
 </html>
