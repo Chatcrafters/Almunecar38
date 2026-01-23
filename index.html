@@ -1189,6 +1189,11 @@
       sessionStorage.setItem('am38_utm', JSON.stringify(trackingParams));
     }
 
+    // URL-Parameter verstecken (nach dem Speichern)
+    if (window.location.search) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     // Hole gespeicherte Tracking-Daten (falls User später zurückkommt)
     function getStoredTracking() {
       const storedRef = sessionStorage.getItem('am38_ref');
